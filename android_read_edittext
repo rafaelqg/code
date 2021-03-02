@@ -1,0 +1,19 @@
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        findViewById(R.id.buttonSearch).setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        EditText field = (EditText) findViewById(R.id.editTextSearchText);
+                        Editable edt= field.getText();
+                        String textInput= edt.toString();
+                        Log.i("On Click event:", textInput);
+                    }
+                }
+        );
+    }
+}
