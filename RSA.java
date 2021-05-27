@@ -32,7 +32,7 @@ public class RSA {
     try {
         final KeyPairGenerator keyGen = KeyPairGenerator.getInstance(ALGORITHM);
         keyGen.initialize(1024);
-        final KeyPair key = keyGen.generateKeyPair();
+        final KeyPair keys = keyGen.generateKeyPair();
 
         File privateKeyFile = new File(PATH_PRIVATE_KEY);
         File publickeyFile = new File(PATH_PUBLIC_KEY);
@@ -52,12 +52,12 @@ public class RSA {
 
         // Save public key content into a File
         ObjectOutputStream publicKeyOS = new ObjectOutputStream(new FileOutputStream(publickeyFile));
-        publicKeyOS.writeObject(key.getPublic());
+        publicKeyOS.writeObject(keys.getPublic());
         publicKeyOS.close();
 
         // Save private key content into a File
         ObjectOutputStream privateKeyOS = new ObjectOutputStream(new FileOutputStream(privateKeyFile));
-        privateKeyOS.writeObject(key.getPrivate());
+        privateKeyOS.writeObject(keys.getPrivate());
         privateKeyOS.close();
     } catch (Exception e) {
       e.printStackTrace();
