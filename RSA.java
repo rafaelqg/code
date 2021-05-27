@@ -83,12 +83,12 @@ public class RSA {
   /**
    * encrypt content using the public key
    */
-  public static byte[] encrypt(byte[] content, PublicKey chave) {
+  public static byte[] encrypt(byte[] content, PublicKey key) {
     byte[] cipherText = null;
      
     try {
       final Cipher cipher = Cipher.getInstance(ALGORITHM);
-      cipher.init(Cipher.ENCRYPT_MODE, chave);
+      cipher.init(Cipher.ENCRYPT_MODE, key);
       cipherText = cipher.doFinal(content);
     } catch (Exception e) {
       e.printStackTrace();
@@ -100,12 +100,12 @@ public class RSA {
   /**
    * decrypt the content using the private key
    */
-  public static byte[] decrypt(byte[] content, PrivateKey chave) {
+  public static byte[] decrypt(byte[] content, PrivateKey key) {
     byte[] dectyptedText = null;
      
     try {
       final Cipher cipher = Cipher.getInstance(ALGORITHM);
-      cipher.init(Cipher.DECRYPT_MODE, chave);
+      cipher.init(Cipher.DECRYPT_MODE, key);
       dectyptedText = cipher.doFinal(content);
   
     } catch (Exception ex) {
