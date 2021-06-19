@@ -1,0 +1,45 @@
+// table definition
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from` int(11) NOT NULL,
+  `to` int(11) NOT NULL,
+  `content` varbinary(5000) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `to_idx` (`to`),
+  KEY `from` (`from`),
+  CONSTRAINT `from` FOREIGN KEY (`from`) REFERENCES `users` (`id`),
+  CONSTRAINT `to` FOREIGN KEY (`to`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+//reading data from database
+ String sql = "SELECT content FROM secret_messages.messages where `to`=?";
+            Connection con = ds.getCon();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, 4);
+            ResultSet rs = ps.executeQuery();
+         
+            while (rs.next()) {
+                //String content=rs.getString(1);
+                byte[] content = rs.getBytes("content");// varbinary or blob columns
+                try{
+                    originalContent = RSA.decrypt(content , privateKey);
+                    response.getOutputStream().print("<br/>");
+                    response.getOutputStream().print(new String(originalContent));  
+                }catch(Exception e){
+                    response.getOutputStream().print("Not possile to decript:"+new String(content));  
+                    e.printStackTrace();
+                }
+            }  
+            
+  //writting data into database
+  
+  ds = new DataSourceMySQL();
+  sql = "insert into messages (`from`,`to`,content) values(?,?,?)";
+  con = ds.getCon();
+  ps = con.prepareStatement(sql);
+  ps.setLong(1, from);
+  ps.setLong(2, to);
+  //ps.setString(3, content);//byte[] variable
+  ps.setBytes(3, messageCyphered);//VARBINARY OR BLOB ON MySQL
+  boolean result = ps.execute();
