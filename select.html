@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <script>
+            function handleSelectSingle(){
+                let selectField=document.forms[0].singleSelect;
+                console.log(selectField);
+                console.log("Value",selectField.options[selectField.selectedIndex].value);
+                console.log("Text",selectField.options[selectField.selectedIndex].text);
+            }
+
+            function handleSelectMultiple(){
+                let selectField=document.forms[0].multipleSelect;
+                console.log(selectField);
+                console.log("SelectedIndex",selectField.selectedIndex);
+                for(let i=0; i< selectField.options.length;i++){
+                    if(selectField.options[i].selected){
+                        console.log("Select value",selectField.options[i].value,selectField.options[i].text);
+                    }
+                }
+            }
+    
+        </script>
+    </head>
+    <body>
+        <form>
+            Select (Single)<br/>
+             <select name="singleSelect">
+                <option value="1">Red</option>
+                <option value="2">Green</option>
+                <option value="3">Blue</option>
+            </select>
+            <br />
+            <input type="button" value="Handle select single" onclick="handleSelectSingle()" />
+            <br /><br /><br />
+            <br/>
+            Select (Multiple) <br/>
+            <select multiple name="multipleSelect">
+                <option value="1">Red</option>
+                <option value="2">Green</option>
+                <option value="3">Blue</option>
+            </select><br />
+            
+            <input type="button" value="Handle select multiple" onclick="handleSelectMultiple()" />
+        </form>
+    </body>
+</html>
