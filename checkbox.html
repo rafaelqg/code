@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <script>
+            function handleCheckbox(){
+                let checkboxField=document.forms[0].additionals;
+                console.log(checkboxField, typeof(checkboxField));
+                for(let i=0; i< checkboxField.length;i++){
+                    if(checkboxField[i].checked){
+                        console.log("The selected option was:", checkboxField[i].value);
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Multiple selector using checkbox</h1>
+        <form>
+            <input type="checkbox" name="additionals" value="cheese" /> Cheese
+            <br/>
+            <input type="checkbox" name="additionals" value="bacon" /> Bacon
+            <br/>
+            <input type="checkbox" name="additionals" value="tomate" /> Tomato
+            <br/>
+            <input type="button" value="Handle checkbox" onclick="handleCheckbox()" />
+        </form>
+    </body>
+</html>
