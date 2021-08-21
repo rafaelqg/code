@@ -1,0 +1,13 @@
+https://ionicframework.com/docs/angular/navigation
+file:
+app-routing.module.ts
+const routes: Routes = [
+ 
+  { path: 'register', component: RegisterFormComponent },
+  { path: '', component: LoginFormComponent },
+];
+
+In components .html files:
+<ion-button [routerLink]="['']" color="warning">Cancel</ion-button>
+
+<ion-button [routerLink]="['register']">Create an Account</ion-button>
