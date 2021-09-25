@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:http/http.dart' as http; //perform http request
+import 'dart:convert'; // convert response string to JSON (map)
 void main() {
   runApp(const MyApp());
 }
@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String data="";
   String title="";
-  Future<String> performHTTPRequest() async {
+  performHTTPRequest() async {
     String output="";
     final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
     //http://192.168.0.27:5500/messages.json
@@ -63,17 +63,24 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
             Text(
-              '$title',
-              style: Theme.of(context).textTheme.headline5,
+              '::: HTTP Response :::\n',
+              style: Theme.of(context).textTheme.headline6,
             ),
             Text(
               '$data',
+            ),
+            Text(
+              '\n::: The JSON title attribute :::\n',
               style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
+              '$title',
             ),
             TextButton(
               onPressed: () => getHTTPRequestData(),
-              child: const Text('GET DATA'),
+              child: const Text('GET DATA FROM HTTP REQUEST'),
             ),
           ]
         ),
