@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title>
+            Form validation
+        </title>
+        <script>
+            let y=7;
+            var x=4;
+            const a=6;
+            //a=3;
+            y="Eduardo";
+            console.log(y);
+            console.log(x, y, x*y);
+        </script>
+
+        <style>
+            .classe{
+                background-color: rgb(77, 158, 120);
+            }
+        </style>
+        <script>
+            
+            function initBody(){
+                console.log(5, typeof(5));
+                console.log(5.5, typeof(5.5));
+                console.log("Luiza", typeof("Luiza"));
+                console.log("true", typeof(true));
+                console.log("[]", typeof([]));
+                console.log("{}", typeof({}));
+                console.log("undefined", typeof(undefined));
+                console.log("null", typeof(null));
+                console.log("showMessages", typeof(showMessages));
+               // let demonstracaoJanelas=showMessages;
+               let demonstracaoJanelas=function(){
+                    window.alert("Minha funcao");
+               };
+                x=9;
+                let z=3;
+                if(true){
+                    //let z=2;
+                   // window.alert('z if-body:'+z);
+                }
+              //  window.alert('x:'+x);
+              //  window.alert('y:'+y);
+               // window.alert('z body:'+z);
+                //demonstracaoJanelas();
+                funcaoComParametro(showMessages());
+            }
+
+            function funcaoComParametro(x){
+                console.log("Parametro",x);
+                x();
+            }
+
+            function showMessages(){
+               // window.alert('z func:'+z);
+                
+                let x=3;  
+                             
+                window.alert('x=="3"'+(x=="3"));
+                window.alert('x==="3"'+(x==="3"));
+                window.alert('x===3'+(x===3));
+                //y=window.prompt("Digite o valor de y:","0001");
+               // let soma=x+parseInt(y);
+            //   let soma=x+parseFloat(y);
+                //let soma=x+y;
+            //    window.alert('y+x:'+soma);
+                /*
+                z=window.confirm("Você confirma a ação?");
+                window.alert('z:'+z);
+                */
+                return function (){
+                    alert(x);
+                };
+            }
+        </script>
+    </head>
+    <body  class="classe"><!-- onclick="initBody()" -->
+
+        <button onclick="showMessages()">Teste mensagens</button>
+    </body>
+</html>
