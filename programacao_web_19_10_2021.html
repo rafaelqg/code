@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <script src='https://unpkg.com/prismjs@1.20.0/plugins/autoloader/prism-autoloader.min.js'></script>
+        <script>
+            function limparDiv(){
+                let div=document.getElementById("div_1");
+                document.body.removeChild(div);
+            }
+            function inserir(){
+                let nome=document.getElementById("name").value;
+                let email=document.getElementById("email").value;
+                
+                let tr=document.createElement("tr");//cria linha
+                //adiciona nome na linha
+                let td=document.createElement("td");
+                td.innerHTML=nome;
+                tr.appendChild(td);
+
+                //adiciona email na linha
+                td=document.createElement("td");
+                td.innerHTML=email;
+                tr.appendChild(td);
+                //adicona linha na tabela
+                let table=document.getElementById("tbl1");
+                let tbody=table.tBodies[0];
+                tbody.appendChild(tr);
+
+            }
+
+            function excluir(){
+                let index=document.getElementById("n1").value;
+                let table=document.getElementById("tbl1");
+                table.deleteRow(parseInt(index));
+            }
+        </script>
+    </head>
+<body>
+    <form>
+        <fieldset>
+            <legend>Novo contato</legend>
+            <label for="name">Name</label><br/>
+            <input type="text" id="name" /><br/>
+            <br/>
+            <label for="email">e-mail</label><br/>
+            <input type="email" id="email" /><br/>
+            <br/>
+            <input type="button" value="Inserir item" onclick="inserir()"/>
+        </fieldset>
+    </form>
+    <table id="tbl1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    Indique o indice a ser excluido: <input type="number" id="n1" /><input type="button" value="Excluir" onclick="excluir()" />
+    <!--
+    Meu conteúdo
+    <div id='div_1'>
+        
+       <img id='img_1' />
+    </div>
+    Mais conteúdo....
+    <input type="button" onclick="limparDiv()" value="Limpar" />
+    --> 
+</body>
+<script>
+   // console.log(document.body.innerHTML);
+    let image=window.document.createElement("img");
+    image.src="https://avatars.githubusercontent.com/u/48798027?s=160&v=4";
+
+    console.log(typeof 5);
+    console.log(typeof 5.5);
+    console.log(typeof "xxx");
+    console.log(typeof true);
+    console.log(typeof undefined);
+    console.log(typeof null);
+    console.log(typeof NaN);
+    console.log(typeof image);
+    console.log(typeof image.tagName, image.tagName);
+    console.log(typeof window.document.body);
+    console.log(typeof window.document.body.tagName,window.document.body.tagName);
+
+    console.log("Body:",Object.getPrototypeOf(window.document.body));
+    console.log("IMG:",Object.getPrototypeOf(image));
+    console.log(document);
+
+   // console.log("tagname:", image.tagName);
+   // console.log(image);
+   // let div=document.getElementById("div_1");
+  //  div.appendChild(image);
+  //  console.log(document.body.children);
+  //  console.log(document.body.childNodes);
+    //document.body.appendChild(image);
+    //document.body.innerHTML+="<img src='https://raw.githubusercontent.com/bigskysoftware/htmx/master/www/img/htmx_logo.1.png'>";
+    //document.getElementById("img_1").src="https://avatars.githubusercontent.com/u/48798027?s=160&v=4";
+</script>
+</html>
