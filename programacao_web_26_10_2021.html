@@ -1,0 +1,91 @@
+<html>
+
+    <head>
+        <style>
+            .classElement{
+                border: 1px solid black;
+                margin: 5px;
+                background-color: cyan;
+            }
+        </style>
+        <script>
+            function echo(str){
+                console.log(str);
+            }
+
+            function carregaElementos(){
+                console.log("Carregando....");
+                //document.getElementsByTagName("button")[document.getElementsByTagName("button").length-1];
+                let btCancelar=document.querySelector("footer input[value='Cancelar']");
+                console.log(btCancelar);
+                btCancelar.style.backgroundColor="green";
+                btCancelar.style.fontSize="18px";
+                let cancelar=function(){
+                    let fieldEmail=document.querySelector("input[type='text']");
+                    fieldEmail.value="";
+                    fieldEmail.style.border="5px solid blue";
+                    
+                }
+                
+                btCancelar.addEventListener("click",cancelar);
+
+                document.getElementById("bt3").className="classElement";
+            }
+
+            function acessoElementos(){
+                let bt=document.getElementById("bt1");
+                console.log("getElementById",bt,bt.innerHTML);
+                let btArray=document.getElementsByName("bt1Name");
+                console.log("getElementsByName",btArray);
+                let divs=document.getElementsByTagName("div");
+                console.log("getElementsByTagName",divs);
+                let els=document.getElementsByClassName("classElement");
+                console.log("getElementsByClassName",els);
+                let el=document.querySelector("div");
+                console.log("querySelector",el);
+
+                el=document.querySelectorAll("div");
+                console.log("querySelectorAll",el,el[0]);
+                els=document.querySelectorAll("div, footer, header, button[name='bt1Name']");
+                console.log("querySelectorAll - 2",els);
+
+                for(let i=0;i<els.length;i++){
+                    console.log("Elemento",i, els[i]);
+                }
+
+                console.log("======= FOR EACH=====");
+                els.forEach(function(object, index){//,el, array
+                    console.log("Elemento",object);
+                    console.log("Elemento",index, els[index], object);
+                });
+
+                console.log("======= Arrow Syntax =====");
+                els.forEach((object, index)=>{//,el, array
+                    console.log("Elemento",object);
+                    console.log("Elemento",index, els[index], object);
+                });
+
+
+                
+            }
+        </script>
+    </head>
+
+    <body onload="carregaElementos()">
+        <header class="classElement">
+            Cabeçalho
+        </header>
+        <div class="classElement">DIV A</div>
+
+        <div class="classElement">DIV B</div>
+        <div class="classElement">DIV C</div>
+        <input type="button" id="bt3" value="Cancelar" />
+        <footer class="classElement">
+            Rodapé<br />
+            <input type="text" placeholder="e-mail" onblur="echo('Blur')" onchange="echo('change')" onmouseout="echo('onmouseout')" />
+            <button id="bt1" name="bt1Name" onclick="acessoElementos()">Registre-se</button>
+            <input type="button" id="bt2" value="Cancelar" />
+        </footer>
+    </body>
+
+</html>
