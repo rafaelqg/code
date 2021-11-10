@@ -1,0 +1,89 @@
+<!-- pagina_A.html -->
+<html>
+
+<head>
+    <script>
+        let segundaJanela; 
+        
+        function abrirJanela(url, target){
+            let width=300;
+            let height=500;
+            console.log(window.innerWidth, window.innerHeight);
+            let left=(window.innerWidth-width)/2;
+            let top=(window.innerHeight-height)/2;
+            segundaJanela= window.open(url+"?xxxx=11&y=111", target,'width='+width+',height='+height+',left='+left+',top='+top);
+           // segundaJanela.document.body.innerHTML="Menu novo conteúdo escrito pela janela pai";
+            ///let divJanela2=segundaJanela.document.getElementById("conteudo");
+            //console.log("Body segunda janela", segundaJanela.document.body);
+            window.description="Menu novo conteúdo escrito pela janela pai";
+           // console.log("Div conteudo", divJanela2);
+          //  divJanela2.innerHTML="OK...";
+            console.log(segundaJanela);
+        }
+        function fecharJanela(){
+            if(typeof(segundaJanela)!= "undefined"){
+                segundaJanela.close();
+            }
+        }
+        console.log("Location", window.location);
+        console.log("Location.port", window.location.port);
+        console.log("Location.protocol", window.location.protocol);
+        console.log("Location.protocol.href", window.location.href);
+        if(window.location.href.indexOf("?")!=-1){
+            let parametrosA=window.location.href.split("?")[1];
+            let parametrosB=window.location.href.substring(window.location.href.indexOf("?")+1,window.location.href.length);
+            console.log("Parametros:", parametrosA, parametrosB);
+            let id= parametrosA.split("id=")[1];
+            let name=parametrosA.split("name=")[1];
+
+
+            id= id.indexOf("&")!=-1 ?id.split("&")[0]:id;
+            name=name.indexOf("&")!=-1?name.split("&"[0]):name;
+            console.log(id, name);
+        }
+        //window.location.href="pagina_B.html";
+    </script>
+</head>
+<body>
+    <input type="text" id="f1" onkeyup="segundaJanela.atualiza()" />
+    <button onclick="abrirJanela('https://www.univali.br','_blank')">Abrir Janela Externa</button>
+    <button onclick="abrirJanela('pagina_B.html','_blank')">Abrir Janela Interna</button>
+    <button onclick="fecharJanela()">Fechar janela</button>
+</body>
+
+
+</html>
+<!-- pagina_B.html -->
+<html>
+
+<head>
+    <script>
+        function atualizaJanelaPai(){
+            let parentWindow=window.opener;
+           // parentWindow.document.body.innerHTML="Atualizado.....";
+           let newInput=parentWindow.document.createElement("input");
+           parentWindow.document.body.appendChild(newInput);
+        }
+
+       function sincronizaComJanelaPai(){
+            let parentWindow=window.opener;
+            //document.getElementById("conteudo").innerHTML=parentWindow.description;
+            document.getElementById("conteudo").innerHTML=parentWindow.document.getElementById("f1").value;
+        }
+
+        window.atualiza=sincronizaComJanelaPai;
+        //setInterval(sincronizaComJanelaPai,1000);
+    </script>
+</head>
+<body>
+<h1>Olá! Eu sou a página B!!!</h1>
+<div id="conteudo"></div>
+
+<button onclick="atualizaJanelaPai()">Atualizar Janela Pai</button>
+<!--
+<button onclick="sincronizaComJanelaPai()" >Sincronizar Janela Pai</button>
+-->
+</body>
+
+
+</html>
