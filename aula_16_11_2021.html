@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <script>
+          /*
+            console.log("window.document.cookie=", window.document.cookie);
+            window.document.cookie="disciplina=programação web; expires=Thu, 18 Dec 2023 12:00:00 UTC";
+            console.log("window.document.cookie=", window.document.cookie);
+            window.document.cookie="curso=Ciência da Computação; Secure";
+            console.log("window.document.cookie=",window.document.cookie);
+            window.document.cookie="fase=quarta";
+            console.log("window.document.cookie=",window.document.cookie);
+            */
+           // window.document.cookie="curso=Ciência da Computação; Secure";
+           /*
+            let dt= new Date(2023,1,1);
+            console.log(dt.toUTCString());
+            window.document.cookie="curso=Ciência da Computação; expires="+dt.toUTCString();
+            */
+           let ids=["name","email","motivo", "curso"];
+
+           function gravarCampoCookie(p1){
+               field=p1.target;
+               window.document.cookie=field.id+"="+field.value;
+           }
+        
+           function limpaCookies(){
+            let dtOuttodate=new Date(2021,10,16);
+            ids.forEach(id=>{
+                window.document.cookie=id+"= ;expires="+dtOuttodate.toUTCString();
+            });
+            
+           }
+           function configuraPagina(){
+            
+            ids.forEach(id=>{
+                let field=document.getElementById(id);
+                field.onchange=gravarCampoCookie;
+            });
+            let cookies=window.document.cookie;
+            console.log("cookies", cookies);
+            let cookiesArray= cookies.split("; ");
+            cookiesArray.forEach(cookie=>{
+                let keyPair=cookie.split("=");
+                document.getElementById(keyPair[0]).value=keyPair[1];
+            });
+           }
+        </script>
+    </head>
+    <body onload="configuraPagina()">
+        <form>
+            <fieldset>
+                <legend> Exemplo Persistência Local - Cookies</legend>
+                <div>
+                    <label for="name"> Nome </label>:
+                    <input id="name"  /> <!-- onchange="gravarCampoCookie(this)" -->
+                </div>
+                <div>
+                    <label for="email"> E-mail </label>:
+                    <input id="email"  />
+                </div>
+                <div>
+                    <label for="motivo"> Motivo </label>:
+                    <input id="motivo" />
+                </div>
+                <div>
+                    <label for="curso">Curso </label>:
+                    <select  id="curso">
+                        <option></option>
+                        <option>Java Script</option>
+                        <option>Java Web (JSP/Servlets)</option>
+                    </select>
+                    <input type="button" onclick="limpaCookies()" value="Enviar"/>
+                </div>
+            </fieldset>
+        </form>
+    </body>
+</html>
