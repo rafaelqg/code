@@ -1,0 +1,77 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+            <script>
+                console.log("Local storage",window.localStorage);
+                console.log("Session storage",window.sessionStorage);
+                window.localStorage.setItem("disciplina","Programação web");
+                window.localStorage.curso="Ciência da Computação";
+                window.sessionStorage.setItem("presentes",11);
+
+                console.log("Leitura - curso:",window.localStorage.getItem("curso"));
+                console.log("Leitura - presentes:",window.sessionStorage.presentes);
+
+                //window.localStorage.removeItem("curso");
+                let strLocalStorage=JSON.stringify(window.localStorage);
+                console.log("Stringify", strLocalStorage, typeof(strLocalStorage));
+                let str="web";
+                let strUpper=str.toUpperCase();
+                console.log(str, strUpper,strUpper==str);
+                let array=["a"];
+                let arrayTmp=array;
+                console.log(array);
+                array.push("b");
+                console.log(array,arrayTmp,arrayTmp==array);
+                let obj=JSON.parse(strLocalStorage);
+                let obj2=JSON.parse(JSON.stringify(obj));
+                if(obj==obj2){
+                    console.log("É o mesmo objeto");
+                }else{
+                    console.log("Não é o mesmo objeto");
+                }
+                console.log(obj, obj2);
+                console.log("disciplina", obj.disciplina);
+                window.sessionStorage.setItem("localStorage",strLocalStorage);
+                let name="Rafael";
+                let myObject={
+                    "name":name,
+                    email: "rafaelqg@univali.br",
+                    sayHallo: function(){
+                        console.log(("Hello, my name is "+this.name).toUpperCase());
+                    }
+                };
+                myObject.phone="00 000 000000";
+                /*
+                myObject.sayHallo= function(){
+                        console.log("Hello, my name is "+this.name);
+                };
+                */
+                console.log("Name:",myObject.name,myObject["name"]);
+                console.log(myObject, typeof(myObject));
+                console.log("typeof sayHallo", typeof(myObject.sayHallo));
+                myObject.sayHallo();
+
+                let strObject=JSON.stringify(myObject);
+                console.log("Object/Function", strObject);
+
+                let httpRequest= new XMLHttpRequest();
+                httpRequest.onreadystatechange=function(){
+                    if(this.readyState==4){
+                        if(this.status==200){
+                            console.log("Sucess",this.responseText);
+                        }else{
+                            console.log("Error....",this.status);
+                        }
+                    }
+                };
+                httpRequest.open("GET","dados.json", true);
+                httpRequest.send();
+               
+
+
+            </script>
+    </body>
+
+</html>
