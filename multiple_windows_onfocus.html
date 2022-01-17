@@ -1,0 +1,36 @@
+<html>
+<head>
+<script>
+       const URL="https://www.ecma-international.org/publications-and-standards/standards/ecma-262/";
+        //first example: opens new window without controlling instances
+        function openNewWindow(){
+            window.open(URL,"_blank","width=500,height=750");
+        }
+        //second example: opens new window controlling to have maxium one opened instance
+        let newWindow =  null;
+        function openNewWindowSingleInstance(){
+            //.closed: a boolean attribute the informs if the window was closed or not
+            if(newWindow !== null && !newWindow.closed){
+                //.focus(): if the window is minimized, it becomes visible again
+                newWindow.focus(); 
+            }else{
+                // the .open method returns a reference to the opened window
+                newWindow = window.open(URL,"_blank","width=500,height=750"); 
+            }
+        }
+    </script>
+</head>
+<body>
+        <div align="center">
+                <h>Java Script - Handling multiple windows - onFocus() method</h>
+                <br />
+                <button onclick="openNewWindow()">
+                        Open another window (always a new one)
+                </button>
+                <br /><br />
+                <button onclick="openNewWindowSingleInstance()">
+                        Open another window (just once, single instance)
+                </button>
+        </div>
+</body>
+</html>
