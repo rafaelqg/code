@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <script>
+            let dialog = null;
+
+            function openAuthenticationDialog(){
+                document.getElementById('dialog_1').showModal();
+            }
+
+            function closeAuthenticationDialog(){
+                document.getElementById('dialog_1').close();
+                showProcessingDialog();
+            }
+
+            function showProcessingDialog(){
+            	dialog = document.createElement("dialog");
+                document.body.appendChild(dialog);
+                dialog.innerHTML =  "Your data is being processed, it will be closed automatically";
+                dialog.style.backgroundColor = "#0A0"; 
+                dialog.showModal();
+                setTimeout(function(){dialog.close()}, 3000);
+            }
+        </script>
+    </head>
+	<body>
+            <h1>Do you know HTML DIALOG tag?</h1>
+            <button onclick="openAuthenticationDialog()">Open modal - Login popup</button>
+            
+            <dialog id="dialog_1">
+                <form>
+                    <input type="text" placeholder="login" />
+                    <input type="text" placeholder="password" />
+                    <input type="button" onclick="closeAuthenticationDialog()" value = "Authenticate" />
+                </form>
+            </dialog>
+	<body>
+<html>
