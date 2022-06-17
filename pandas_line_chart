@@ -1,0 +1,14 @@
+import pandas as pd
+import matplotlib.pyplot as plt  #provides interface like MATLAB
+
+# Define first series
+pandasSeriesObject01 = pd.Series(data=[3.4, 9.7, 5.3, 6.5, 3, 3.4], name="Control Group")
+print (pandasSeriesObject01, type(pandasSeriesObject01))
+pandasSeriesObject01.plot(legend=True)
+
+# Define second series
+pandasSeriesObject02 = pd.Series(data=[5.4, 3.7, 3.3, 1.5, 2, 5.4], name="Experimental Group")
+pandasSeriesObject02.plot(title="Comparison", legend=True, xlabel="order", ylabel="value") #prepares the plot to be displayed.
+
+#presents data in a GUI
+plt.show() # shows the chart that was prepared by plot() function
