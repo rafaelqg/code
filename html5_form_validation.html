@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <style>
+            input, button, select, label, h1, p{
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 5px;
+                margin: 20px;
+            }
+            /* using pseudo class invalid and valid */
+            input:valid, select:valid{
+                border: 1px solid green;
+            }
+            input:invalid, select:invalid{
+                border: 1px solid yellow;
+            }
+        </style>
+    </head>
+    <body>
+        <div  style="text-align: center; margin-left:30%; margin-right:30%;background-color: #CCC;width:600px">
+            <h1>CONTACT REQUEST</h1>
+            <form>
+                <!-- using required and pattern attribute -->
+                <label for="f1">How can we reach you?</label><br />
+                <input name="f1" id="f1" required pattern="[a-zA-z]{2-3}" placeholder="ex. type your e-mail" /><br/>
+                
+
+                <label for="f2">What is your purpose?</label><br />
+                <select name="f2" required  >
+                    <option value="">-- Please select a value --</option>
+                    <option>I want to sell</option>
+                    <option>I want to buy</option>
+                </select>
+                <br/>
+
+                <label for="f3">Please inform your VOUCHER?</label><br />
+                <input name="f3" id="f3" required pattern="[a-zA-z]{6}" placeholder="XXXXXX"/><br/>
+                
+                <button>Send your request</button>
+                <p>
+                    This is a demo code for presenting HTML5 attributes required and pattern and the :valid and :invalid pseudo classes.
+                </p>
+            </form>
+
+        </div>
+    </body>
+</html>
