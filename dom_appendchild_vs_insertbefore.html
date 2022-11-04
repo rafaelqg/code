@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <style>
+            header, article, form, footer{
+                border: 1px solid black;
+                margin: 20px;
+                padding: 20px
+            }
+            
+        </style>
+        <script>
+            function domDemo(){
+                let body = document.body;
+                let children = body.children;
+                let childNodes = body.childNodes;
+                console.log(children, childNodes);
+
+                let newElement = document.createElement("button");
+                newElement.innerText = "Click here to do something";
+                //body.appendChild(newElement);
+                body.insertBefore(newElement,children[2]);
+            
+            }
+        </script>
+    <head>
+    <body onload="domDemo()">
+        <header>
+            <h1>Document Object Model: appendChild() vs insertBefore()</h1>
+        </header>
+        <article>
+            It is an article
+        </article>
+        <form>
+            It is a form
+        </form>
+        <footer>
+            It is a footer
+        </footer>
+    </body>
+
+</html>
