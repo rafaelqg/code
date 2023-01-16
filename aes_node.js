@@ -17,9 +17,13 @@ function decrypt(text) {
  let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
  let decrypted = decipher.update(encryptedText);
  decrypted = Buffer.concat([decrypted, decipher.final()]);
- return decrypted.toString();
+ return decrypted;
 }
 
-var hw = encrypt("A dream doesn't become reality through magic; it takes sweat, determination and hard work.")
+const textToEncrypt = "A dream doesn't become reality through magic; it takes sweat, determination and hard work.";
+const textToEncryptAsByteArray = Buffer.from(textToEncrypt);
+var hw = encrypt(textToEncryptAsByteArray)
 console.log("encrypt result", hw);
-console.log("decrypt result", decrypt(hw))
+let decryptedContent = decrypt(hw);
+decryptedContentAsText = decryptedContent.toString();
+console.log("decrypt result", decryptedContentAsText)
