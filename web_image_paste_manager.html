@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <script>
+            const copiedImages = [];// this variable store all pasted images in base64 format
+            function initEventHandler(){   
+                console.log("registered onPaste() event");
+                document.addEventListener("paste", (event) => {
+                        let data = event.clipboardData;
+                        console.log("Handling copy event....", event, data);
+                        if (data.files.length > 0) {
+                            console.log("Data-file",data.files[ 0 ]);
+                            let file = data.files[0]; 
+                            file.arrayBuffer().then((arrayBuffer) => {
+                                console.log("file converted to array buffer"); 
+                                const blob = new Blob([new Uint8Array(arrayBuffer)], {type: file.type });
+                                console.log(blob);
+                                let divImages = document.getElementById("images_board");
+                                let blobUrl = URL.createObjectURL(blob);
+                                let imageHTML = "<a href='"+ blobUrl +"' target='_blank'>";
+                                imageHTML += "<img class='pastedImage' src='" + blobUrl + "'/>" ;
+                                imageHTML += "</a>";
+                                divImages.innerHTML += imageHTML;
+                                //store content to later backend saving
+                                let reader = new FileReader();
+                                reader.readAsDataURL(blob); 
+                                reader.onloadend = function() {
+                                    let base64data = reader.result;                
+                                    copiedImages.push(base64data);
+                                    console.log(copiedImages);
+                                }                            
+                            });
+                        }else{
+                            console.log("You have pasted a text:", data.getData('text'))
+                        }                        
+                });
+            }
+
+            function displayImagesContent(){
+                document.getElementById("image_content").innerHTML = JSON.stringify(copiedImages);
+            }
+        </script>
+        <style>
+            .images_board{
+                border: 2px dashed #777;
+                width: 80%;
+                min-height: 300px;
+                max-width: 80%;
+                padding: 20px;
+                word-wrap: break-word;
+            }
+
+            .pastedImage{
+                padding: 20px;
+                margin: 10px;
+                border: 1px solid #AAA;
+                width: 250px;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body onload="initEventHandler()">
+        <h1>Handling onPaste to get buffered images</h1>
+        <div>
+            Copy a file from your operational system or a image from a web page and paste on this page.
+        </div>
+        <div id="images_board" class="images_board"></div>
+        <div>
+            <a href="#" onclick="displayImagesContent()">Click here to see images binary content in base64 format.</a>
+        </div>
+        <div id="image_content" class="images_board">
+        </div>
+    </body>
+</html>
