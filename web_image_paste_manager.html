@@ -10,6 +10,7 @@
                         if (data.files.length > 0) {
                             console.log("Data-file",data.files[ 0 ]);
                             let file = data.files[0]; 
+                            console.log("copied file", file); //.type: type "image/" ".name", /
                             file.arrayBuffer().then((arrayBuffer) => {
                                 console.log("file converted to array buffer"); 
                                 const blob = new Blob([new Uint8Array(arrayBuffer)], {type: file.type });
@@ -17,7 +18,13 @@
                                 let divImages = document.getElementById("images_board");
                                 let blobUrl = URL.createObjectURL(blob);
                                 let imageHTML = "<a href='"+ blobUrl +"' target='_blank'>";
-                                imageHTML += "<img class='pastedImage' src='" + blobUrl + "'/>" ;
+                                if (file.type.indexOf("image/") !== -1 ){
+                                    imageHTML += "<img class='pastedImage' src='" + blobUrl + "'/>" ;
+                                }else{
+                                    let indexDot = file.name.indexOf(".");
+                                    let extension = indexDot === -1 ? "FILE" : file.name.substring(indexDot, file.name.length).toUpperCase();
+                                    imageHTML += "<div class='pastedImage' ><h1>" + extension + "</h1>" + file.name + "</div>";
+                                }
                                 imageHTML += "</a>";
                                 divImages.innerHTML += imageHTML;
                                 //store content to later backend saving
@@ -59,13 +66,13 @@
         </style>
     </head>
     <body onload="initEventHandler()">
-        <h1>Handling onPaste to get buffered images</h1>
+        <h1>Handling onPaste to get buffered images and files</h1>
         <div>
             Copy a file from your operational system or a image from a web page and paste on this page.
         </div>
         <div id="images_board" class="images_board"></div>
         <div>
-            <a href="#" onclick="displayImagesContent()">Click here to see images binary content in base64 format.</a>
+            <a href="#" onclick="displayImagesContent()">Click here to see images and files binaries content in base64 format.</a>
         </div>
         <div id="image_content" class="images_board">
         </div>
