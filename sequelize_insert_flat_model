@@ -1,0 +1,51 @@
+
+const { Sequelize, DataTypes} = require('sequelize'); //npm install --save sequelize , npm install --save mysql2
+//initialize mysql connection
+const MYSQL_IP="localhost";
+const MYSQL_LOGIN="xxxxx";
+const MYSQL_PASSWORD="xxxxx";
+const DATABASE = "sakila";
+const sequelize = new Sequelize(DATABASE , MYSQL_LOGIN, MYSQL_PASSWORD, {
+  host: MYSQL_IP,
+  dialect: "mysql"
+});
+const Actor = sequelize.define('Actor', {  // Model attributes are defined here 
+  actor_id: {
+    type: DataTypes.INTEGER,  //https://sequelize.org/docs/v7/other-topics/other-data-types/
+    autoIncrement: true,
+    primaryKey: true
+  },
+  first_name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  last_name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  last_update: {
+    type: DataTypes.DATE,
+  }
+}, {
+  tableName: 'actor',
+  timestamps: false,// important: otherweise createdAt and updatedAt are mandatory columns
+});
+let testConnection = async function(){
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+    let actor = {
+      first_name: "Rafael",
+      last_name: "Gonçalves"
+    };
+    let returnedObject = await Actor.create(actor);
+    console.log("New actor:", actor, returnedObject);
+    let generatedKey = returnedObject.dataValues.actor_id;
+    console.log("Generated key", generatedKey);
+    let actorLoaded = await Actor.findByPk(generatedKey);
+    console.log("actorLoaded",actorLoaded);
+  } catch (error) {
+    console.error("Error log", error);
+  }
+}
+testConnection();
