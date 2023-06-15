@@ -1,8 +1,8 @@
 
 const { Sequelize, DataTypes} = require('sequelize'); //npm install --save sequelize , npm install --save mysql2
 const MYSQL_IP="localhost";
-const MYSQL_LOGIN="root";
-const MYSQL_PASSWORD="root";
+const MYSQL_LOGIN="xxxx";
+const MYSQL_PASSWORD="xxxx";
 const DATABASE = "sakila";
 const sequelize = new Sequelize(DATABASE , MYSQL_LOGIN, MYSQL_PASSWORD, {
   host: MYSQL_IP,
